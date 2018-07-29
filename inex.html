@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 闭包要解决的问题是什么?
+            // 如何在函数外面访问函数里面的内容;  
+
+        // 闭包的基本模式;
+        function outer(){
+            var data=1;
+            function inner(){
+                // 操作data;
+                data=value;
+            }
+            return inner;
+        }
+        var f=outer();//此时f指向函数inner的地址;
+
+        // 获取值;
+        function out(){
+            var num=1;
+            function int(value){
+                // 为变量num设置值;
+                if(value){
+                    num=value;
+                }else{
+                    // 获取值;
+                    return num;
+                } 
+            }
+            return int;
+        };
+        var m=out();
+        m(3);
+        // 闭包的变形;
+        function ou(){
+            var num=123;
+            var obj={
+                getNum:function(){
+                    return num;
+                },
+                setNum:function(value){
+                    num=value;
+                }
+            }
+        };
+        var q=ou();
+        q.getNum();
+        q.setNum(12121);
+        // 闭包的作用;
+            // 1.给内部函数一个私有的变量,这个变量只有函数本身能够使用,其他不能使用,避免变量被污染;
+            // 2.闭包的缺点:会造成内存泄露(闭包里的数据不会自动释放),直到程序结束;
+    </script>
+</body>
+</html>
